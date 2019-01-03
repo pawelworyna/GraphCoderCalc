@@ -11,28 +11,26 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 public class MainActivity extends AppCompatActivity {
+
+    private EditText formula;
+    private GraphView graph;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final EditText formula = findViewById(R.id.editText);
-        GraphView graph = findViewById(R.id.graph);
-//        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-//                new DataPoint(0, 1),
-//                new DataPoint(1, 5),
-//                new DataPoint(2, 3),
-//                new DataPoint(3, 2),
-//                new DataPoint(4, 6)
-//        });
+        formula = findViewById(R.id.editText);
+        graph = findViewById(R.id.graph);
 
         graph.getViewport().setScrollable(true); // enables horizontal scrolling
         graph.getViewport().setScrollableY(true); // enables vertical scrolling
         graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
         graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
-//        graph.addSeries(series);
-        Log.d("info", String.valueOf(graph.getViewport().getMaxXAxisSize()));
+
 
         Button btn1 = findViewById(R.id.bt1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btnDot = findViewById(R.id.btDot);
-        btnPercent.setOnClickListener(new View.OnClickListener() {
+        btnDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 formula.append(".");
@@ -166,10 +164,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //work on confirm button
-    // public void drawGraph(){
-    //evaluate equation from formula
-    //draw graph
-    //}
+    public void drawGraph(){
+
+        String myFormula = formula.getText().toString();
+        Expression expression;
+
+        double x = -10.0, y;
+        DataPoint[] points = new DataPoint[1000];
+        for(int i= 0; i<1000; i++){
+
+            expression = new ExpressionBuilder(myFormula)
+                    .variables("x")
+                    .build()
+                    .setVariable("x", x);
+            y = expression.evaluate();
+            points[i] = new DataPoint(x, y );
+            x = x+0.1;
+        }
+
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+
+        graph.addSeries(series);
+
+    }
 
 
 }

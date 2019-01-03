@@ -16,6 +16,11 @@
     <string name="btnDivide">/</string>
     <string name="btnPercent">%</string>
     <string name="btnDot">.</string>
-    <string name="formula">f(x)=</string>
+    <string name="cursorLeft">←</string>
+    <string name="cursorRight">→</string>
+    <string name="backspace">⌫</string>
+    <string name="confirm">✓</string>
+    <string name="btnFunction">f(x)</string>
+    <string name="btnNumbers">123</string>
 
 </resources>

@@ -22,5 +22,7 @@
     <string name="confirm">✓</string>
     <string name="btnFunction">f(x)</string>
     <string name="btnNumbers">123</string>
+    <string name="formula">f(x)=</string>
+    <string name="editFormula"></string>
 
 </resources>

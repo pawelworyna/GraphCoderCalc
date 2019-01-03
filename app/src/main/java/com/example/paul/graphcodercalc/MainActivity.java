@@ -2,7 +2,6 @@ package com.example.paul.graphcodercalc;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,13 +29,15 @@ public class MainActivity extends AppCompatActivity {
         graph.getViewport().setScrollableY(true); // enables vertical scrolling
         graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
         graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+        graph.getGridLabelRenderer().setVerticalAxisTitle("Y");
+        graph.getGridLabelRenderer().setHorizontalAxisTitle("X");
 
 
         Button btn1 = findViewById(R.id.bt1);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("1");
+                formula.getText().insert(formula.getSelectionStart(), "1");
             }
         });
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("2");
+                formula.getText().insert(formula.getSelectionStart(), "2");
             }
         });
 
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("3");
+                formula.getText().insert(formula.getSelectionStart(), "3");
             }
         });
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("4");
+                formula.getText().insert(formula.getSelectionStart(), "4");
             }
         });
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("5");
+                formula.getText().insert(formula.getSelectionStart(), "5");
             }
         });
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("6");
+                formula.getText().insert(formula.getSelectionStart(), "6");
             }
         });
 
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("7");
+                formula.getText().insert(formula.getSelectionStart(), "7");
             }
         });
 
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("8");
+                formula.getText().insert(formula.getSelectionStart(), "8");
             }
         });
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("9");
+                formula.getText().insert(formula.getSelectionStart(), "9");
             }
         });
 
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("0");
+                formula.getText().insert(formula.getSelectionStart(), "0");
             }
         });
 
@@ -116,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("+");
+                formula.getText().insert(formula.getSelectionStart(), "+");
             }
         });
 
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("-");
+                formula.getText().insert(formula.getSelectionStart(), "-");
             }
         });
 
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         btnTimes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("*");
+                formula.getText().insert(formula.getSelectionStart(), "*");
             }
         });
 
@@ -140,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         btnDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("/");
+                formula.getText().insert(formula.getSelectionStart(), "/");
             }
         });
 
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         btnPercent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append("%");
+                formula.getText().insert(formula.getSelectionStart(), "%");
             }
         });
 
@@ -156,9 +157,53 @@ public class MainActivity extends AppCompatActivity {
         btnDot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                formula.append(".");
+                formula.getText().insert(formula.getSelectionStart(), ".");
             }
         });
+
+        Button btnConfirm = findViewById(R.id.btConfirm);
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawGraph();
+            }
+        });
+
+        Button btnBackspace = findViewById(R.id.btBackspace);
+        btnBackspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               int length = formula.getText().length();
+                if (length > 0) {
+                    formula.getText().delete(length - 1, length);
+                }
+            }
+        });
+
+        Button btnLeftArray = findViewById(R.id.btArrLeft);
+        btnLeftArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = formula.getSelectionStart();
+                if(position > 0){
+                    position = position - 1;
+                    formula.setSelection(position);
+                }
+            }
+        });
+
+        Button btnRightArray = findViewById(R.id.btArrRight);
+        btnRightArray.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = formula.getSelectionStart();
+                if(position<formula.getText().length()) {
+                    position = position + 1;
+                    formula.setSelection(position);
+                }
+            }
+        });
+
 
 
     }
@@ -171,21 +216,29 @@ public class MainActivity extends AppCompatActivity {
 
         double x = -10.0, y;
         DataPoint[] points = new DataPoint[1000];
-        for(int i= 0; i<1000; i++){
+        if (!myFormula.isEmpty()) {
+            for (int i = 0; i < 1000; i++) {
 
-            expression = new ExpressionBuilder(myFormula)
-                    .variables("x")
-                    .build()
-                    .setVariable("x", x);
-            y = expression.evaluate();
-            points[i] = new DataPoint(x, y );
-            x = x+0.1;
+                expression = new ExpressionBuilder(myFormula)
+                        .variables("x")
+                        .build()
+                        .setVariable("x", x);
+                y = expression.evaluate();
+                points[i] = new DataPoint(x, y);
+                x = x + 0.1;
+            }
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
+            graph.addSeries(series);
+        } else {
+            clearGraph();
         }
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
 
-        graph.addSeries(series);
 
+    }
+
+    public void clearGraph(){
+        graph.removeAllSeries();
     }
 
 

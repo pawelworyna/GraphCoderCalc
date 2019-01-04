@@ -24,5 +24,21 @@
     <string name="btnNumbers">123</string>
     <string name="formula">f(x)=</string>
     <string name="editFormula"></string>
+    <string name="btnSin">sin</string>
+    <string name="btnCos">cos</string>
+    <string name="btnTan">tan</string>
+    <string name="btnASin">asin</string>
+    <string name="btnACos">acos</string>
+    <string name="btnATan">atan</string>
+    <string name="btnLN">ln</string>
+    <string name="btnLog10">log10</string>
+    <string name="btnPow">^</string>
+    <string name="btnSqrt">√</string>
+    <string name="btnOpnParsis">(</string>
+    <string name="btnClsParsis">)</string>
+    <string name="btnX">x</string>
+    <string name="btnPi">π</string>
+    <string name="btnEuler">e</string>
+    <string name="btnAbs">|x|</string>
 
 </resources>

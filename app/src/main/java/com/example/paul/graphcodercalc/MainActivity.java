@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText formula;
     private GraphView graph;
+    private Boolean flagKeyboard = false;
+    private RelativeLayout layoutNumbers;
+    private RelativeLayout layoutFunctions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         formula = findViewById(R.id.editText);
         graph = findViewById(R.id.graph);
+        layoutNumbers = findViewById(R.id.numbersLayout);
+        layoutFunctions = findViewById(R.id.functionsLayout);
 
         graph.getViewport().setScrollable(true); // enables horizontal scrolling
         graph.getViewport().setScrollableY(true); // enables vertical scrolling
@@ -32,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         graph.getGridLabelRenderer().setVerticalAxisTitle("Y");
         graph.getGridLabelRenderer().setHorizontalAxisTitle("X");
 
+
+        //numbers keyboards
 
         Button btn1 = findViewById(R.id.bt1);
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +169,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //controls keyboard
+
         Button btnConfirm = findViewById(R.id.btConfirm);
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,6 +215,154 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button btnKeybrdNumbers = findViewById(R.id.btLayoutNumbers);
+        btnKeybrdNumbers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flagKeyboard = false;
+                changeKeyboard();
+            }
+        });
+
+        Button btnKeybrdFunction = findViewById(R.id.btLayoutFunctions);
+        btnKeybrdFunction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flagKeyboard = true;
+                changeKeyboard();
+            }
+        });
+
+
+        //functions keyboard
+        Button btnSin = findViewById(R.id.btSin);
+        btnSin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "sin");
+            }
+        });
+
+        Button btnCos = findViewById(R.id.btCos);
+        btnCos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "cos");
+            }
+        });
+
+        Button btnTan = findViewById(R.id.btTan);
+        btnTan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "tan");
+            }
+        });
+
+        Button btnASin = findViewById(R.id.btASin);
+        btnASin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "asin");
+            }
+        });
+
+        Button btnACos = findViewById(R.id.btACos);
+        btnACos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "acos");
+            }
+        });
+
+        Button btnATan = findViewById(R.id.btATan);
+        btnATan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "atan");
+            }
+        });
+
+        Button btnLN = findViewById(R.id.btLN);
+        btnLN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "log");
+            }
+        });
+
+        Button btnLog10 = findViewById(R.id.btLog10);
+        btnLog10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "log10");
+            }
+        });
+
+        Button btnPower = findViewById(R.id.btPow);
+        btnPower.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "^");
+            }
+        });
+
+        Button btnSqrt = findViewById(R.id.btSqrt);
+        btnSqrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "sqrt");
+            }
+        });
+
+        Button btnOpenParenthesis = findViewById(R.id.btOpnPar);
+        btnOpenParenthesis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "(");
+            }
+        });
+
+        Button btnCloseParenthesis = findViewById(R.id.btClsPar);
+        btnCloseParenthesis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), ")");
+            }
+        });
+
+        Button btnX = findViewById(R.id.btX);
+        btnX.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "x");
+            }
+        });
+
+        Button btnPi = findViewById(R.id.btPI);
+        btnPi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "π");
+            }
+        });
+
+        Button btnEuler = findViewById(R.id.btEuler);
+        btnEuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "e");
+            }
+        });
+
+        Button btnAbs = findViewById(R.id.btAbs);
+        btnAbs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                formula.getText().insert(formula.getSelectionStart(), "abs");
+            }
+        });
+
 
 
     }
@@ -215,9 +374,9 @@ public class MainActivity extends AppCompatActivity {
         Expression expression;
 
         double x = -10.0, y;
-        DataPoint[] points = new DataPoint[1000];
+        DataPoint[] points = new DataPoint[10000];
         if (!myFormula.isEmpty()) {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 10000; i++) {
 
                 expression = new ExpressionBuilder(myFormula)
                         .variables("x")
@@ -225,7 +384,7 @@ public class MainActivity extends AppCompatActivity {
                         .setVariable("x", x);
                 y = expression.evaluate();
                 points[i] = new DataPoint(x, y);
-                x = x + 0.1;
+                x = x + 0.01;
             }
             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
             graph.addSeries(series);
@@ -239,6 +398,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void clearGraph(){
         graph.removeAllSeries();
+    }
+
+    public void changeKeyboard(){
+        if (!flagKeyboard) {
+            layoutFunctions.setVisibility(View.INVISIBLE);
+            layoutNumbers.setVisibility(View.VISIBLE);
+        } else {
+            layoutFunctions.setVisibility(View.VISIBLE);
+            layoutNumbers.setVisibility(View.INVISIBLE);
+        }
     }
 
 

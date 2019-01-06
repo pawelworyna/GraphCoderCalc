@@ -10,7 +10,16 @@
     <com.jjoe64.graphview.GraphView
         android:id="@+id/graph"
         android:layout_width="match_parent"
+        android:layout_above="@+id/gestures"
+        app:seriesColor="#ee0000"
         android:layout_height="202dp" />
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gestures"
+        android:layout_below="@id/graph"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       />
 
     <EditText
         android:id="@+id/editText"
@@ -20,8 +29,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
+        android:hint="@string/editFormula"
         android:inputType="none|text"
         android:text="@string/editFormula"
         app:layout_constraintEnd_toEndOf="parent"
@@ -401,5 +409,7 @@
             android:layout_below="@+id/btCos"
             android:text="@string/btnLN" />
     </RelativeLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

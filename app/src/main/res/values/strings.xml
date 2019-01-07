@@ -40,5 +40,9 @@
     <string name="btnPi">π</string>
     <string name="btnEuler">e</string>
     <string name="btnAbs">|x|</string>
+    <string name="btnDEC">DEC</string>
+    <string name="btnOCT">OCT</string>
+    <string name="btnHEX">HEX</string>
+
 
 </resources>

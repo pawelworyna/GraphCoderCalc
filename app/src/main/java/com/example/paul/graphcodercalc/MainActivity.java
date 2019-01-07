@@ -1,11 +1,22 @@
 package com.example.paul.graphcodercalc;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.gesture.Gesture;
+import android.gesture.GestureLibraries;
+import android.gesture.GestureLibrary;
+import android.gesture.GestureOverlayView;
+import android.gesture.Prediction;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -14,13 +25,16 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements GestureOverlayView.OnGesturePerformedListener {
 
     private EditText formula;
     private GraphView graph;
     private Boolean flagKeyboard = false;
     private RelativeLayout layoutNumbers;
     private RelativeLayout layoutFunctions;
+    private GestureLibrary mLibrary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +45,28 @@ public class MainActivity extends AppCompatActivity {
         layoutNumbers = findViewById(R.id.numbersLayout);
         layoutFunctions = findViewById(R.id.functionsLayout);
 
-        graph.getViewport().setScrollable(true); // enables horizontal scrolling
-        graph.getViewport().setScrollableY(true); // enables vertical scrolling
-        graph.getViewport().setScalable(true); // enables horizontal zooming and scrolling
-        graph.getViewport().setScalableY(true); // enables vertical zooming and scrolling
+        // set manual X bounds
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(-5);
+        graph.getViewport().setMaxX(5);
+
+        // set manual Y bounds
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(-5);
+        graph.getViewport().setMaxY(5);
         graph.getGridLabelRenderer().setVerticalAxisTitle("Y");
         graph.getGridLabelRenderer().setHorizontalAxisTitle("X");
 
+
+        //gestures
+        mLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures);
+        if (!mLibrary.load()) {
+            finish();
+        }
+        GestureOverlayView gestures = findViewById(R.id.gestures);
+        gestures.addOnGesturePerformedListener(this);
+        gestures.setGestureColor(Color.TRANSPARENT);
+        gestures.setUncertainGestureColor(Color.TRANSPARENT);
 
         //numbers keyboards
 
@@ -176,15 +205,22 @@ public class MainActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawGraph();
-            }
-        });
+              new Thread(new Runnable() {
+                  @Override
+                  public void run() {
+                      drawGraph();
+                  }
+              }).start();
+
+                }
+
+            });
 
         Button btnBackspace = findViewById(R.id.btBackspace);
         btnBackspace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               int length = formula.getText().length();
+                int length = formula.getText().length();
                 if (length > 0) {
                     formula.getText().delete(length - 1, length);
                 }
@@ -196,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int position = formula.getSelectionStart();
-                if(position > 0){
+                if (position > 0) {
                     position = position - 1;
                     formula.setSelection(position);
                 }
@@ -208,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int position = formula.getSelectionStart();
-                if(position<formula.getText().length()) {
+                if (position < formula.getText().length()) {
                     position = position + 1;
                     formula.setSelection(position);
                 }
@@ -364,16 +400,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
     }
 
     //work on confirm button
-    public void drawGraph(){
+    public void drawGraph() {
 
         String myFormula = formula.getText().toString();
         Expression expression;
 
-        double x = -10.0, y;
+        double x = -5.0, y;
         DataPoint[] points = new DataPoint[10000];
         if (!myFormula.isEmpty()) {
             for (int i = 0; i < 10000; i++) {
@@ -393,14 +428,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
     }
 
-    public void clearGraph(){
+    public void clearGraph() {
         graph.removeAllSeries();
     }
 
-    public void changeKeyboard(){
+    public void changeKeyboard() {
         if (!flagKeyboard) {
             layoutFunctions.setVisibility(View.INVISIBLE);
             layoutNumbers.setVisibility(View.VISIBLE);
@@ -411,4 +445,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onGesturePerformed(GestureOverlayView overlay, Gesture gesture) {
+        ArrayList<Prediction> predictions = mLibrary.recognize(gesture);
+        if (predictions.size() > 0) {
+            Prediction prediction = predictions.get(0);
+            if (prediction.name.equals("swipeRight")) {
+                Intent intent = new Intent(this, NumeralSystemActivity.class);
+                startActivity(intent);
+            }
+        }
+    }
 }

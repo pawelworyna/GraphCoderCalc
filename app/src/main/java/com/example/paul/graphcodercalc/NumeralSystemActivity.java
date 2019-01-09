@@ -9,8 +9,10 @@ import android.gesture.Prediction;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
@@ -25,6 +27,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
 
     private GestureLibrary mLibrary;
     private EditText mathFormula;
+    private int numeralSystemId = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,22 +46,70 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
 
 
 
-    }
 
-    public void convertToHex() {
-        String number =Long.toHexString(Long.parseLong(mathFormula.getText().toString()));
-        mathFormula.setText(number);
+
 
     }
 
-    public void convertToOct() {
-        String number = Long.toOctalString(Long.parseLong(mathFormula.getText().toString()));
-        mathFormula.setText(number);
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radioButtonOCT:
+                if (checked) {
+                    mathFormula.setText(convertToOct(mathFormula.getText().toString(),numeralSystemId));
+                    numeralSystemId = 8;
+                    break;
+                }
+            case R.id.radioButtonHEX:
+                if (checked) {
+
+                    mathFormula.setText(convertToHex(mathFormula.getText().toString(),numeralSystemId));
+                    numeralSystemId = 16;
+                    break;
+                }
+                default:
+                    if (checked) {
+                        mathFormula.setText(convertToDec(mathFormula.getText().toString(),numeralSystemId));
+                        numeralSystemId = 10;
+
+                    }
+        }
+    }
+
+    public String convertToHex(String number, int fromNumeralSystem) {
+        if(!number.equals("")) {
+            return Long.toHexString(Long.parseLong(number,fromNumeralSystem)).toUpperCase();
+        }
+        else{
+            return "";
+        }
+
+
+
 
     }
 
-    public void convertToDec() {
-        String number =  Long.toString(Long.parseLong(mathFormula.getText().toString()));
+    public String convertToOct(String number, int fromNumeralSystem) {
+        if(!number.equals("")){
+            return Long.toOctalString(Long.parseLong(number,fromNumeralSystem));
+        } else{
+            return "";
+        }
+
+
+    }
+
+    public String convertToDec(String number, int fromNumeralSystem) {
+        if(!number.equals("")) {
+            return String.valueOf(Long.parseLong(number, fromNumeralSystem));
+        } else {
+            return "";
+        }
+
 
 
     }

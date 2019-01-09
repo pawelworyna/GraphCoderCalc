@@ -6,22 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".NumeralSystemActivity">
 
-    <EditText
-        android:id="@+id/editText2"
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gestures"
+        android:layout_below="@id/graph"
         android:layout_width="match_parent"
-        android:layout_height="158dp"
+        android:layout_height="match_parent"
+        />
+
+    <EditText
+        android:id="@+id/mathFormula"
+        android:layout_width="match_parent"
+        android:layout_height="165dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        tools:layout_editor_absoluteX="43dp"
-        tools:layout_editor_absoluteY="-1dp" />
+        android:hint="@string/editFormula"
+        android:inputType="none|text"
+        android:singleLine="false"
+        android:text="@string/editFormula"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="124dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="151dp">
+        app:layout_constraintBottom_toTopOf="@+id/keyboardsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="158dp" >
 
@@ -49,12 +65,19 @@
     </RadioGroup>
 
     <RelativeLayout
-        android:layout_width="344dp"
-        android:layout_height="368dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="191dp">
+        android:id="@+id/keyboardsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gestures"
+        app:layout_constraintVertical_bias="0.502">
+
 
         <RelativeLayout
+            android:id="@+id/ctrlKeyLayout"
             android:layout_width="344dp"
             android:layout_height="368dp"
             tools:layout_editor_absoluteX="8dp"
@@ -99,10 +122,12 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="344dp"
-            android:layout_height="368dp"
+            android:layout_width="224dp"
+            android:layout_height="221dp"
+            android:layout_centerHorizontal="true"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="191dp">
+
 
         </RelativeLayout>
 

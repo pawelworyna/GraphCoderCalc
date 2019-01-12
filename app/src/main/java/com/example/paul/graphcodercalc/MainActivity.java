@@ -410,7 +410,7 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
 
         double x = -5.0, y;
         DataPoint[] points = new DataPoint[10000];
-        if (!myFormula.isEmpty()) {
+        try {
             for (int i = 0; i < 10000; i++) {
 
                 expression = new ExpressionBuilder(myFormula)
@@ -423,7 +423,7 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
             }
             LineGraphSeries<DataPoint> series = new LineGraphSeries<>(points);
             graph.addSeries(series);
-        } else {
+        } catch (RuntimeException re){
             clearGraph();
         }
 

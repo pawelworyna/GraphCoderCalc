@@ -43,6 +43,12 @@
     <string name="btnDEC">DEC</string>
     <string name="btnOCT">OCT</string>
     <string name="btnHEX">HEX</string>
+    <string name="btnA">A</string>
+    <string name="btnB">B</string>
+    <string name="btnC">C</string>
+    <string name="btnD">D</string>
+    <string name="btnE">E</string>
+    <string name="btnF">F</string>
 
 
 </resources>

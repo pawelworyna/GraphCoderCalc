@@ -20,6 +20,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.regex.Pattern;
 
 public class NumeralSystemActivity extends AppCompatActivity implements GestureOverlayView.OnGesturePerformedListener {
 
@@ -206,7 +207,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
         });
 
         btnF = findViewById(R.id.btnF);
-        btnDivide.setOnClickListener(new View.OnClickListener() {
+        btnF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mathFormula.getText().insert(mathFormula.getSelectionStart(), "F");
@@ -310,7 +311,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
     }
 
     public String convertToHex(String number, int fromNumeralSystem) {
-        if(!number.equals("")) {
+        if(isInputValidate(number)) {
             return Long.toHexString(Long.parseLong(number,fromNumeralSystem)).toUpperCase();
         }
         else{
@@ -323,7 +324,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
     }
 
     public String convertToOct(String number, int fromNumeralSystem) {
-        if(!number.equals("")){
+        if(isInputValidate(number)){
             return Long.toOctalString(Long.parseLong(number,fromNumeralSystem));
         } else{
             return "";
@@ -333,7 +334,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
     }
 
     public String convertToDec(String number, int fromNumeralSystem) {
-        if(!number.equals("")) {
+        if(isInputValidate(number)) {
             return String.valueOf(Long.parseLong(number, fromNumeralSystem));
         } else {
             return "";
@@ -399,6 +400,11 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
                 startActivity(intent);
             }
         }
+    }
+
+
+    public boolean isInputValidate(String input) {
+        return input.matches("\\w+");
     }
 
     public void changeKeyboard() {

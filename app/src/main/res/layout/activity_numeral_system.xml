@@ -6,32 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".NumeralSystemActivity">
 
-    <android.gesture.GestureOverlayView
-        android:id="@+id/gestures"
-        android:layout_below="@id/graph"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
-
     <EditText
         android:id="@+id/mathFormula"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:layout_marginTop="8dp"
+        android:cursorVisible="true"
         android:ems="10"
-        android:hint="@string/editFormula"
-        android:singleLine="false"
-        android:text="@string/editFormula"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:hint="@string/editFormula"
         android:inputType="none"
-        android:textIsSelectable="true"
-        android:cursorVisible="true"
+        android:singleLine="false"
+        android:text="@string/editFormula"
         android:textCursorDrawable="@null"
+        android:textIsSelectable="true"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.gesture.GestureOverlayView
+        android:id="@+id/gestures"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/graph" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         android:checkedButton="@+id/radioButtonDEC"
         android:orientation="horizontal"
+        android:layout_gravity = "center_horizontal"
         app:layout_constraintBottom_toTopOf="@+id/keyboardsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -75,7 +76,7 @@
     <RelativeLayout
         android:id="@+id/keyboardsLayout"
         android:layout_width="match_parent"
-        android:layout_height="345dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -89,7 +90,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/numbersKeyboardLayout"
-            android:layout_marginBottom="-109dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="191dp">
 
@@ -139,7 +139,6 @@
             android:layout_width="match_parent"
             android:layout_height="236dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="109dp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="191dp">
 

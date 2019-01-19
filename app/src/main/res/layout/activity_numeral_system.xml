@@ -35,17 +35,17 @@
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_above="@+id/keyboardsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/keyboardsLayout"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
         android:checkedButton="@+id/radioButtonDEC"
         android:orientation="horizontal"
-        android:layout_gravity = "center_horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/keyboardsLayout"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
-
 
 
         <RadioButton
@@ -73,262 +73,83 @@
             android:text="@string/btnHEX" />
     </RadioGroup>
 
-    <RelativeLayout
-        android:id="@+id/keyboardsLayout"
-        android:layout_width="match_parent"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gestures"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent">
 
-
-        <RelativeLayout
-            android:id="@+id/ctrlKeyLayout"
+        <LinearLayout
+            android:id="@+id/keyboardsLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/numbersKeyboardLayout"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="191dp">
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btArrLeft"
+
+            <RelativeLayout
+                android:id="@+id/ctrlKeyLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/cursorLeft"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="191dp">
+
+                <Button
+                    android:id="@+id/btArrLeft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/cursorLeft"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="312dp" />
+
+                <Button
+                    android:id="@+id/btArrRight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/btArrLeft"
+                    android:text="@string/cursorRight"
+                    tools:layout_editor_absoluteX="96dp"
+                    tools:layout_editor_absoluteY="312dp" />
+
+                <Button
+                    android:id="@+id/btBackspace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/btArrRight"
+                    android:layout_toRightOf="@+id/btArrRight"
+                    android:text="@string/backspace"
+                    tools:layout_editor_absoluteX="184dp"
+                    tools:layout_editor_absoluteY="312dp" />
+
+                <Button
+                    android:id="@+id/btConfirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/btBackspace"
+                    android:layout_toRightOf="@+id/btBackspace"
+                    android:text="@string/confirm"
+                    tools:layout_editor_absoluteX="272dp"
+                    tools:layout_editor_absoluteY="312dp" />
+
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/numbersLayout"
+                layout="@layout/numeral_systems_keyboards"
+                android:visibility="visible"
                 tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="312dp"
-                android:layout_alignParentLeft="true" />
+                tools:layout_editor_absoluteY="359dp" />
 
-            <Button
-                android:id="@+id/btArrRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/btArrLeft"
-                android:text="@string/cursorRight"
-                tools:layout_editor_absoluteX="96dp"
-                tools:layout_editor_absoluteY="312dp" />
-
-            <Button
-                android:id="@+id/btBackspace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/btArrRight"
-                android:text="@string/backspace"
-                tools:layout_editor_absoluteX="184dp"
-                tools:layout_editor_absoluteY="312dp"
-                android:layout_toRightOf="@+id/btArrRight" />
-
-            <Button
-                android:id="@+id/btConfirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/btBackspace"
-                android:text="@string/confirm"
-                tools:layout_editor_absoluteX="272dp"
-                tools:layout_editor_absoluteY="312dp"
-                android:layout_toRightOf="@+id/btBackspace" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/numbersKeyboardLayout"
-            android:layout_width="match_parent"
-            android:layout_height="236dp"
-            android:layout_alignParentTop="true"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="191dp">
-
-
-            <Button
-                android:id="@+id/btnPlus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:text="@string/btnPlus" />
-
-            <Button
-                android:id="@+id/btn1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/btnPlus"
-                android:text="@string/btn1"
-                android:layout_alignParentLeft="true" />
-
-            <Button
-                android:id="@+id/btn4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/btn1"
-                android:text="@string/btn4"
-                android:layout_alignParentLeft="true" />
-
-            <Button
-                android:id="@+id/btn7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/btn4"
-                android:text="@string/btn7"
-                android:layout_alignParentLeft="true" />
-
-            <Button
-                android:id="@+id/btnMinus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/btnPlus"
-                android:text="@string/btnMinus"
-                android:layout_toRightOf="@+id/btnPlus" />
-
-            <Button
-                android:id="@+id/btn2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnPlus"
-                android:layout_toEndOf="@+id/btnPlus"
-                android:text="@string/btn2"
-                android:layout_toRightOf="@+id/btnPlus" />
-
-            <Button
-                android:id="@+id/btn5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn1"
-                android:layout_toEndOf="@+id/btnPlus"
-                android:text="@string/btn5"
-                android:layout_toRightOf="@+id/btnPlus" />
-
-            <Button
-                android:id="@+id/btn8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn4"
-                android:layout_toEndOf="@+id/btnPlus"
-                android:text="@string/btn8"
-                android:layout_toRightOf="@+id/btnPlus" />
-
-            <Button
-                android:id="@+id/btnDivide"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/btnMinus"
-                android:text="@string/btnDivide"
-                android:layout_toRightOf="@+id/btnMinus" />
-
-            <Button
-                android:id="@+id/btn3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnPlus"
-                android:layout_toEndOf="@+id/btnMinus"
-                android:text="@string/btn3"
-                android:layout_toRightOf="@+id/btnMinus" />
-
-            <Button
-                android:id="@+id/btn6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn1"
-                android:layout_toEndOf="@+id/btnMinus"
-                android:text="@string/btn6"
-                android:layout_toRightOf="@+id/btnMinus" />
-
-            <Button
-                android:id="@+id/btn9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn4"
-                android:layout_toEndOf="@+id/btnMinus"
-                android:text="@string/btn9"
-                android:layout_toRightOf="@+id/btnMinus" />
-
-            <Button
-                android:id="@+id/btnTimes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/btnDivide"
-                android:text="@string/btnTimes"
-                android:layout_toRightOf="@+id/btnDivide" />
-
-            <Button
-                android:id="@+id/btnC"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnPlus"
-                android:layout_toEndOf="@+id/btnDivide"
-                android:text="@string/btnC"
-                android:layout_toRightOf="@+id/btnDivide" />
-
-            <Button
-                android:id="@+id/btnD"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn1"
-                android:layout_toEndOf="@+id/btnDivide"
-                android:text="@string/btnD"
-                android:layout_toRightOf="@+id/btnDivide" />
-
-            <Button
-                android:id="@+id/btnE"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btn4"
-                android:layout_toEndOf="@+id/btnDivide"
-                android:text="@string/btnE"
-                android:layout_toRightOf="@+id/btnDivide" />
-
-            <Button
-                android:id="@+id/btn0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:text="@string/btn0"
-                android:layout_alignParentLeft="true" />
-
-            <Button
-                android:id="@+id/btnA"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/btnPlus"
-                android:text="@string/btnA"
-                android:layout_toRightOf="@+id/btnPlus" />
-
-            <Button
-                android:id="@+id/btnB"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/btnMinus"
-                android:text="@string/btnB"
-                android:layout_toRightOf="@+id/btnMinus" />
-
-            <Button
-                android:id="@+id/btnF"
-                android:enabled="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toEndOf="@+id/btnDivide"
-                android:text="@string/btnF"
-                android:layout_toRightOf="@+id/btnDivide" />
-        </RelativeLayout>
-
-    </RelativeLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

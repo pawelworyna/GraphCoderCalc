@@ -38,18 +38,13 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
         setContentView(R.layout.activity_main);
         formula = findViewById(R.id.editText);
         graph = findViewById(R.id.graph);
-        layoutNumbers = findViewById(R.id.numbersLayout);
-        layoutFunctions = findViewById(R.id.functionsLayout);
 
-        // set manual X bounds
-        graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setMinX(-5);
-        graph.getViewport().setMaxX(5);
 
-        // set manual Y bounds
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setMinY(-5);
-        graph.getViewport().setMaxY(5);
+        // graph settings
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScalableY(true);
+        graph.getViewport().setScrollableY(true);
         graph.getGridLabelRenderer().setVerticalAxisTitle("Y");
         graph.getGridLabelRenderer().setHorizontalAxisTitle("X");
 
@@ -207,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
                       drawGraph();
                   }
               }).start();
-
+                formula.setSelection(formula.getText().length());
                 }
 
             });
@@ -432,11 +427,11 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
 
     public void changeKeyboard() {
         if (!flagKeyboard) {
-            layoutFunctions.setVisibility(View.INVISIBLE);
-            layoutNumbers.setVisibility(View.VISIBLE);
+            findViewById(R.id.functionsLayout).setVisibility(View.GONE);
+            findViewById(R.id.numbersLayout).setVisibility(View.VISIBLE);
         } else {
-            layoutFunctions.setVisibility(View.VISIBLE);
-            layoutNumbers.setVisibility(View.INVISIBLE);
+            findViewById(R.id.functionsLayout).setVisibility(View.VISIBLE);
+            findViewById(R.id.numbersLayout).setVisibility(View.GONE);
         }
     }
 

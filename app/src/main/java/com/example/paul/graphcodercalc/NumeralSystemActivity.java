@@ -225,12 +225,15 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
 
                                                   if (numeralSystemId == 16) {
                                                       mathFormula.setText(Integer.toHexString(calculate(numeralSystemId)).toUpperCase());
+                                                      mathFormula.setSelection(mathFormula.getText().length());
                                                   } else if (numeralSystemId == 8) {
                                                       mathFormula.setText(Integer.toOctalString(calculate(numeralSystemId)));
+                                                      mathFormula.setSelection(mathFormula.getText().length());
                                                   } else {
                                                       mathFormula.setText(String.valueOf(calculate(numeralSystemId)));
+                                                      mathFormula.setSelection(mathFormula.getText().length());
                                                   }
-                                              } catch (IllegalStateException | NumberFormatException ise) {
+                                              } catch (IllegalStateException |  IllegalArgumentException ise) {
                                                   mathFormula.setText("");
                                               }
 

@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
         formula = findViewById(R.id.editText);
         graph = findViewById(R.id.graph);
 
-
         // graph settings
         graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
@@ -399,7 +398,7 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
         String myFormula = formula.getText().toString();
         Expression expression;
 
-        double x = -5.0, y;
+        double x = -10.0, y;
         DataPoint[] points = new DataPoint[10000];
         try {
             for (int i = 0; i < 10000; i++) {

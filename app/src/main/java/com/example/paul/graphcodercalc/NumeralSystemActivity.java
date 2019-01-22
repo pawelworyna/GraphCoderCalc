@@ -235,6 +235,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
                                                   }
                                               } catch (IllegalStateException |  IllegalArgumentException ise) {
                                                   mathFormula.setText("");
+                                                  mathFormula.setSelection(mathFormula.getText().length());
                                               }
 
                                           }
@@ -293,6 +294,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
                     mathFormula.setText(convertToOct(mathFormula.getText().toString(),numeralSystemId));
                     numeralSystemId = 8;
                     changeKeyboard();
+                    mathFormula.setSelection(mathFormula.getText().length());
                     break;
                 }
             case R.id.radioButtonHEX:
@@ -301,6 +303,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
                     mathFormula.setText(convertToHex(mathFormula.getText().toString(),numeralSystemId));
                     numeralSystemId = 16;
                     changeKeyboard();
+                    mathFormula.setSelection(mathFormula.getText().length());
                     break;
                 }
                 default:
@@ -308,6 +311,7 @@ public class NumeralSystemActivity extends AppCompatActivity implements GestureO
                         mathFormula.setText(convertToDec(mathFormula.getText().toString(),numeralSystemId));
                         numeralSystemId = 10;
                         changeKeyboard();
+                        mathFormula.setSelection(mathFormula.getText().length());
 
                     }
         }

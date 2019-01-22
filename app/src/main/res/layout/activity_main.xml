@@ -61,6 +61,7 @@
                     android:ems="10"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
+                    android:textCursorDrawable="@null"
                     android:hint="@string/editFormula"
                     android:inputType="none|text"
                     android:text="@string/editFormula"

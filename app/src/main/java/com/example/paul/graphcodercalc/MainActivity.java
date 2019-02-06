@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements GestureOverlayVie
     private EditText formula;
     private GraphView graph;
     private Boolean flagKeyboard = false;
-    private RelativeLayout layoutNumbers;
-    private RelativeLayout layoutFunctions;
     private GestureLibrary mLibrary;
 
     @Override
